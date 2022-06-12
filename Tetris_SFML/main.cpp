@@ -19,6 +19,11 @@ int main()
 		2,3,4,5, // 7
 	};
 
+	struct Point
+	{
+		int x, y;
+	} a[4],b[4];
+
 	// Main Window
 	sf::RenderWindow window(sf::VideoMode(320, 480), "The Game!");
 
@@ -43,12 +48,24 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		int n = 3;// ZADAEM TIP TETRAMINO
+
+		for (int i = 0; i < 4; i++)
+		{
+			a[i].x = figures[n][i] % 2;
+			a[i].y = figures[n][i] / 2;
+		}
+
 		// Setup background color (White)
 		window.clear(sf::Color::White);
 
-		// Sprite draw
-		window.draw(sprite);
-
+		for (int i = 0; i < 4; i++)
+		{
+			// Setup position for all tetraminos
+			sprite.setPosition(a[i].x * 18, a[i].y * 18);
+			// Sprite draw
+			window.draw(sprite);
+		}
 		// Window Render
 		window.display();
 	}
