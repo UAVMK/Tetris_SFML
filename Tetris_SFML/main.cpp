@@ -37,6 +37,8 @@ int main()
 	// Cutting box from sprite
 	sprite.setTextureRect(sf::IntRect(0, 0, 18, 18));
 
+	int horizontalMove = 0;
+
 	// Main Cycle (Work, while window is open)
 	while (window.isOpen())
 	{
@@ -47,13 +49,24 @@ int main()
 			// If user want to close window
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			// Check keyboard pressing
+			if (event.type == sf::Event::KeyPressed)
+			
+				// if (event.key.code == Keyboard::Up) rotate = true; // Rotating
+
+				else if (event.key.code == sf::Keyboard::Left) horizontalMove = -1; // Move to Left
+
+				else if (event.key.code == sf::Keyboard::Right) horizontalMove = 1; // Move to Right
+			
 		}
-		int n = 3;// ZADAEM TIP TETRAMINO
+
+		int tetraminoType = 3;// Setup type of tetramino
 
 		for (int i = 0; i < 4; i++)
 		{
-			a[i].x = figures[n][i] % 2;
-			a[i].y = figures[n][i] / 2;
+			a[i].x = figures[tetraminoType][i] % 2;
+			a[i].y = figures[tetraminoType][i] / 2;
 		}
 
 		// Setup background color (White)
