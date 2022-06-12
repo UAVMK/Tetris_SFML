@@ -55,7 +55,7 @@ int main()
 			
 				// if (event.key.code == Keyboard::Up) rotate = true; // Rotating
 
-				else if (event.key.code == sf::Keyboard::Left) horizontalMove = -1; // Move to Left
+			if (event.key.code == sf::Keyboard::Left) horizontalMove = -1; // Move to Left
 
 				else if (event.key.code == sf::Keyboard::Right) horizontalMove = 1; // Move to Right
 			
