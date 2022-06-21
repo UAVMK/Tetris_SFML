@@ -22,7 +22,7 @@ int main()
 	struct Point
 	{
 		int x, y;
-	} a[4],b[4];
+	} a[4], b[4];
 
 	// Main Window
 	sf::RenderWindow window(sf::VideoMode(320, 480), "The Game!");
@@ -52,13 +52,13 @@ int main()
 
 			// Check keyboard pressing
 			if (event.type == sf::Event::KeyPressed)
-			
+
 				// if (event.key.code == Keyboard::Up) rotate = true; // Rotating
 
-			if (event.key.code == sf::Keyboard::Left) horizontalMove = -1; // Move to Left
+				if (event.key.code == sf::Keyboard::Left) horizontalMove = -1; // Move to Left
 
 				else if (event.key.code == sf::Keyboard::Right) horizontalMove = 1; // Move to Right
-			
+
 		}
 
 		int tetraminoType = 3;// Setup type of tetramino
