@@ -1,4 +1,7 @@
 #include <SFML/Graphics.hpp>
+#include <time.h>
+
+
 
 const int HEIGHT = 20; // Height of game field
 const int WIDTH = 10; // Width of game field
@@ -22,9 +25,19 @@ struct Point
 	int x, y;
 } a[4], b[4];
 
+bool check()
+{
+	for (int i = 0; i < 4; i++)
+		if (a[i].x < 0 || a[i].x >= HEIGHT || a[i].y >= WIDTH) return 0;
+		else if (field[a[i].y][a[i].x]) return 0;
+
+	return 1;
+}
 
 int main()
 {
+	srand(time(0)); // Random for tetraminos
+
 	sf::RenderWindow window(sf::VideoMode(320, 480), "Tetris");
 
 	// Creating and loading game tetramino texture
