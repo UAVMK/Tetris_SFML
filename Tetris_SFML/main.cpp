@@ -50,9 +50,10 @@ int main()
 	// Cutting 18õ18 pixels cube
 	sprite.setTextureRect(sf::IntRect(0, 0, 18, 18));
 
-	// Setup Horizontal Movement and rotating
+	// Setup Horizontal Movement, rotating and colors
 	bool rotate = 0;
 	int horizontalMovement = 0;
+	int colorNum = 1;
 
 	// Setup timer and delay
 	float timer = 0, delay = 0.3;
@@ -88,7 +89,11 @@ int main()
 		}
 
 		// Horizontal Movement
-		for (int i = 0; i < 4; i++) a[i].x += horizontalMovement;
+		for (int i = 0; i < 4; i++)
+		{
+			b[i] = a[i];
+			a[i].x += horizontalMovement;
+		}
 
 		// Rotate
 		if (rotate)
@@ -101,31 +106,57 @@ int main()
 				a[i].x = p.x - x;
 				a[i].y = p.y + y;
 			}
+
+			// Check lines after rotating, if go out return old position
+			if (!check())
+			{
+				for (int i = 0; i < 4; i++)
+					a[i] = b[i];
+			}
+
 		}
 
 		// Falling down tetraminos
 		if (timer > delay)
 		{
-			for (int i = 0; i < 4; i++) a[i].y += 1;
+			for (int i = 0; i < 4; i++)
+			{
+				b[i] = a[i]; a[i].y += 1;
+			}
+			if (!check())
+			{
+				for (int i = 0; i < 4; i++) field[b[i].y][b[i].x] = colorNum;
+				colorNum = 1 + rand() % 7;
+				int n = rand() % 7;
+				for (int i = 0; i < 4; i++)
+				{
+					a[i].x = figures[tetraminoType][i] % 2;
+					a[i].y = figures[tetraminoType][i] / 2;
+				}
+			}
 			timer = 0;
 
 		}
 
 
 		// Setup tetramino type
-		int teraminoType = 3;
+		int tetraminoType = 3;
 
 		// Appearence on the field
 		if (a[0].x == 0)
 			for (int i = 0; i < 4; i++)
 			{
-				a[i].x = figures[teraminoType][i] % 2;
-				a[i].y = figures[teraminoType][i] / 2;
+				a[i].x = figures[tetraminoType][i] % 2;
+				a[i].y = figures[tetraminoType][i] / 2;
 			}
-		horizontalMovement = 0; rotate = 0;
+
+		horizontalMovement = 0;
+		rotate = 0;
 
 		// Setup background
 		window.clear(sf::Color::White);
+		for (int i = 0; i < HEIGHT; i++)
+
 
 		for (int i = 0; i < 4; i++)
 		{
